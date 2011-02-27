@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, MainActivity!</string>
+	<string name="app_name">Play the music</string>
+
+	<!-- Do not translate. Duration format for duration < 1 hour -->
+	<string translatable="false" name="durationformatshort">%2$d:%5$02d</string>
+	<!-- Do not translate. Duration format for duration >= 1 hour -->
+	<string translatable="false" name="durationformatlong">%1$d:%3$02d:%5$02d</string>
+
+</resources>
