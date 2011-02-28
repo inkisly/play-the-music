@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class MusicListAdapter extends SimpleCursorAdapter {
+public class TrackBrowserAdapter extends SimpleCursorAdapter {
 	
 	private Context mContext;
 	
@@ -23,7 +23,7 @@ public class MusicListAdapter extends SimpleCursorAdapter {
 		TextView tvDuration;
 	};
 
-	public MusicListAdapter(Context context, int layout, Cursor c,
+	public TrackBrowserAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to) {
 		super(context, layout, c, from, to);
 		// TODO Auto-generated constructor stub

@@ -55,7 +55,5 @@ public class FileBrowserItem {
 
 	public void setlLastModified(long lLastModified) {
 		this.lLastModified = lLastModified;
-	}
-	
-	
+	}	
 }

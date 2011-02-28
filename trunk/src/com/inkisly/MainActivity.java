@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore.Audio.Artists;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,7 +12,10 @@ public class MainActivity extends Activity {
 	private Context mContext;
 	
 	private Button mBtnAll;
-    private Button mBtnBroser;
+	private Button mBtnAlbum;
+	private Button mBtnArtist;
+    private Button mBtnBrowser;
+
 
 	/** Called when the activity is first created. */
     @Override
@@ -26,8 +30,12 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		mBtnAll = (Button) findViewById( R.id.btnAll );
 		mBtnAll.setOnClickListener( mOnClickListener );
-		mBtnBroser = (Button) findViewById( R.id.btnBrowser );
-		mBtnBroser.setOnClickListener( mOnClickListener );
+		mBtnArtist = (Button) findViewById( R.id.btnArtist );
+		mBtnArtist.setOnClickListener( mOnClickListener );
+		mBtnAlbum = (Button) findViewById( R.id.btnAlbum );
+		mBtnAlbum.setOnClickListener( mOnClickListener );
+		mBtnBrowser = (Button) findViewById( R.id.btnBrowser );
+		mBtnBrowser.setOnClickListener( mOnClickListener );
 	}
 	
 	View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -40,7 +48,17 @@ public class MainActivity extends Activity {
 			
 			switch ( v.getId() ) {
 			case R.id.btnAll:
-				i = new Intent( mContext, MusicList.class );
+				i = new Intent( mContext, TrackBrowser.class );
+				startActivity( i );
+				break;
+				
+			case R.id.btnArtist:
+				i = new Intent( mContext, ArtistBrowser.class );
+				startActivity( i );
+				break;
+				
+			case R.id.btnAlbum:
+				i = new Intent( mContext, AlbumBrowser.class );
 				startActivity( i );
 				break;
 				

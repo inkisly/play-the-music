@@ -13,18 +13,18 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public class MusicList extends ListActivity {
+public class TrackBrowser extends ListActivity {
 	
 	private Context mContext;
 	
 	private ListView mlistMusicList;
-	private MusicListAdapter mMusicListAdapter;
+	private TrackBrowserAdapter mMusicListAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView( R.layout.music_list );
+		setContentView( R.layout.track_browser );
 		mContext = getApplicationContext();
 		loadAllView();
 	}
@@ -100,6 +100,6 @@ public class MusicList extends ListActivity {
 		Cursor c = cm.query(uri, projection, selection, selectionArgs, sortOrder);
 		startManagingCursor( c );
 		
-		mMusicListAdapter = new MusicListAdapter( mContext, R.layout.listitem_music_list, c, new String[]{}, new int[]{} );
+		mMusicListAdapter = new TrackBrowserAdapter( mContext, R.layout.listitem_track_browser, c, new String[]{}, new int[]{} );
 	}
 }
