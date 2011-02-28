@@ -9,10 +9,8 @@
 		android:layout_width="wrap_content" android:text="아티스트"></Button>
 	<Button android:id="@+id/btnAlbum" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="앨범"></Button>
-	<Button android:id="@+id/btnPlaylist" android:text="Button"
-		android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
-	<Button android:id="@+id/btnGenre" android:text="Button"
-		android:layout_height="wrap_content" android:layout_width="wrap_content"></Button>
+	<Button android:id="@+id/btnPlaylist" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="재생목록"></Button>
+	<Button android:id="@+id/btnGenre" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="장르"></Button>
 	<Button android:id="@+id/btnBrowser" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="브라우저"></Button>
 </LinearLayout>

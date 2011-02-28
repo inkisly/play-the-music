@@ -10,16 +10,16 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ListView;
 
-public class GenreBrowser extends ListActivity {
+public class PlaylistBrowser extends ListActivity {
 
 	private Context mContext;
-	private GenreBrowserAdapter mGenreBrowserAdapter;
+	private PlaylistBrowserAdapter mPlaylistBrowserAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView( R.layout.genre_browser );
+		setContentView( R.layout.playlist_browser );
 		mContext = getApplicationContext();
 		loadAllView();
 	}
@@ -59,7 +59,7 @@ public class GenreBrowser extends ListActivity {
 		// TODO Auto-generated method stub
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
-        intent.putExtra("genre", Long.valueOf(id).toString());
+        intent.putExtra("playlist", Long.valueOf(id).toString());
 //        intent.putExtra("artist", mArtistId);
         startActivity(intent);
         
@@ -69,13 +69,13 @@ public class GenreBrowser extends ListActivity {
 	private void loadAllView() {
 		// TODO Auto-generated method stub
 		searchList();
-		setListAdapter( mGenreBrowserAdapter );
+		setListAdapter( mPlaylistBrowserAdapter );
 	}
 	
 	private void searchList() {
 		ContentsDBManager cm = new ContentsDBManager( mContext );
 		
-		Uri uri = MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI;
+		Uri uri = MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
 		String [] projection = null;
 		String selection = null;
 		String [] selectionArgs = null;
@@ -84,6 +84,6 @@ public class GenreBrowser extends ListActivity {
 		Cursor c = cm.query(uri, projection, selection, selectionArgs, sortOrder);
 		startManagingCursor( c );
 		
-		mGenreBrowserAdapter = new GenreBrowserAdapter( mContext, R.layout.listitem_genre_browser, c, new String[]{}, new int[]{} );
+		mPlaylistBrowserAdapter = new PlaylistBrowserAdapter( mContext, R.layout.listitem_playlist_browser, c, new String[]{}, new int[]{} );
 	}
 }

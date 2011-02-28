@@ -1,5 +1,7 @@
 package com.inkisly;
 
+import com.inkisly.GenreBrowserAdapter.ViewHolder;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
@@ -8,15 +10,15 @@ import android.view.ViewGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-public class GenreBrowserAdapter extends SimpleCursorAdapter {
+public class PlaylistBrowserAdapter extends SimpleCursorAdapter {
 	
 	private Context mContext;
 	
 	static class ViewHolder {
-		TextView tvGenreTitle;
+		TextView tvPlaylistTitle;
 	};
 
-	public GenreBrowserAdapter(Context context, int layout, Cursor c,
+	public PlaylistBrowserAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to) {
 		super(context, layout, c, from, to);
 		// TODO Auto-generated constructor stub
@@ -28,9 +30,9 @@ public class GenreBrowserAdapter extends SimpleCursorAdapter {
 		// TODO Auto-generated method stub
 		ViewHolder vh = (ViewHolder)view.getTag();
 		
-		String genre = cursor.getString( cursor.getColumnIndex( MediaStore.Audio.Genres.NAME ) );
+		String playlist = cursor.getString( cursor.getColumnIndex( MediaStore.Audio.Playlists.NAME ) );
 		
-		vh.tvGenreTitle.setText( genre );
+		vh.tvPlaylistTitle.setText( playlist );
 		
 		super.bindView(view, context, cursor);
 	}
@@ -42,9 +44,10 @@ public class GenreBrowserAdapter extends SimpleCursorAdapter {
 		View v = super.newView( context, cursor, parent );
 		ViewHolder vh = new ViewHolder();
 		
-		vh.tvGenreTitle = (TextView) v.findViewById( R.id.tvGenreTitle );
+		vh.tvPlaylistTitle = (TextView) v.findViewById( R.id.tvPlaylistTitle );
 		
 		v.setTag( vh );
 		return v;
 	}
+
 }

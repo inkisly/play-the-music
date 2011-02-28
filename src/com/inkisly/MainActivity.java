@@ -12,8 +12,10 @@ public class MainActivity extends Activity {
 	private Context mContext;
 	
 	private Button mBtnAll;
-	private Button mBtnAlbum;
 	private Button mBtnArtist;
+	private Button mBtnAlbum;
+	private Button mBtnPlaylist;
+	private Button mBtnGenre;
     private Button mBtnBrowser;
 
 
@@ -34,6 +36,10 @@ public class MainActivity extends Activity {
 		mBtnArtist.setOnClickListener( mOnClickListener );
 		mBtnAlbum = (Button) findViewById( R.id.btnAlbum );
 		mBtnAlbum.setOnClickListener( mOnClickListener );
+		mBtnPlaylist = (Button) findViewById( R.id.btnPlaylist );
+		mBtnPlaylist.setOnClickListener( mOnClickListener );
+		mBtnGenre = (Button) findViewById( R.id.btnGenre );
+		mBtnGenre.setOnClickListener( mOnClickListener );
 		mBtnBrowser = (Button) findViewById( R.id.btnBrowser );
 		mBtnBrowser.setOnClickListener( mOnClickListener );
 	}
@@ -59,6 +65,16 @@ public class MainActivity extends Activity {
 				
 			case R.id.btnAlbum:
 				i = new Intent( mContext, AlbumBrowser.class );
+				startActivity( i );
+				break;
+				
+			case R.id.btnPlaylist:
+				i = new Intent( mContext, PlaylistBrowser.class );
+				startActivity( i );
+				break;
+				
+			case R.id.btnGenre:
+				i = new Intent( mContext, GenreBrowser.class );
 				startActivity( i );
 				break;
 				
