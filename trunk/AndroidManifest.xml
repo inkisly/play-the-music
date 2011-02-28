@@ -14,7 +14,13 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".MusicList"
+        <activity android:name=".TrackBrowser"
+        	android:screenOrientation="portrait" />
+        
+        <activity android:name=".ArtistBrowser"
+        	android:screenOrientation="portrait" />
+        
+        <activity android:name=".AlbumBrowser"
         	android:screenOrientation="portrait" />
         
         <activity android:name=".FileBrowser"
