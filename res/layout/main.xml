@@ -2,16 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<Button android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:id="@+id/btnAll"
+	<Button android:id="@+id/btnAll" android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
 		android:text="전체"></Button>
 	<Button android:id="@+id/btnArtist" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="아티스트"></Button>
 	<Button android:id="@+id/btnAlbum" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="앨범"></Button>
-	<Button android:id="@+id/btnPlaylist" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="재생목록"></Button>
-	<Button android:id="@+id/btnGenre" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="장르"></Button>
+	<Button android:id="@+id/btnPlaylist" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="재생목록"></Button>
+	<Button android:id="@+id/btnGenre" android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="장르"></Button>
 	<Button android:id="@+id/btnBrowser" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="브라우저"></Button>
-	<Button android:id="@+id/btnCoverFlow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="커버플로우"></Button>
+	<Button android:id="@+id/btnCoverFlow" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="커버플로우"></Button>
 </LinearLayout>

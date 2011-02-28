@@ -3,6 +3,8 @@ package com.inkisly;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
+import com.inkisly.util.LogTrace;
+
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,6 +24,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,7 +52,47 @@ public class CoverFlowExample extends Activity {
 		coverFlow.setAdapter(mImageAdapter);
 		coverFlow.setSpacing(-15);
 		coverFlow.setSelection(1, true);
+		
+		coverFlow.setOnItemClickListener( mOnItemClickListener );
+		coverFlow.setOnItemSelectedListener( mOnItemSelectedListener );
 	}
+	
+	long selectId = -1;
+	long clickId = -1;
+	
+	CoverAdapterView.OnItemClickListener mOnItemClickListener = new CoverAdapterView.OnItemClickListener() {
+
+		@Override
+		public void onItemClick(CoverAdapterView<?> parent, View view,
+				int position, long id) {
+			// TODO Auto-generated method stub
+			LogTrace.d("onItemClick id : " + id );
+			clickId = id;
+			
+			if ( selectId == clickId || 
+					selectId == -1 ) {
+				Animation ani = AnimationUtils.loadAnimation( mContext, R.anim.slide_from_left );
+				view.startAnimation( ani );
+			}
+		}
+	};
+	
+	CoverAdapterView.OnItemSelectedListener mOnItemSelectedListener = new CoverAdapterView.OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(CoverAdapterView<?> parent, View view,
+				int position, long id) {
+			// TODO Auto-generated method stub
+			LogTrace.d("onItemSelected id : " + id );
+			selectId = id;
+		}
+
+		@Override
+		public void onNothingSelected(CoverAdapterView<?> parent) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 
 	public class ImageAdapter extends ArrayAdapter<AlbumArtItem> {
 
