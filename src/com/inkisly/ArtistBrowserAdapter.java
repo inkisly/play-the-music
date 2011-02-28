@@ -1,26 +1,21 @@
 package com.inkisly;
 
-import java.util.List;
-import java.util.Map;
-
-import com.inkisly.TrackBrowserAdapter.ViewHolder;
-import com.inkisly.util.Util;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleCursorAdapter;
+import android.widget.ImageView;
 import android.widget.SimpleCursorTreeAdapter;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
 public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 
 	private Context mContext;
+	private AlbumArtWrapper albumArt;
 
 	public ArtistBrowserAdapter(Context context, Cursor cursor,
 			int groupLayout, String[] groupFrom, int[] groupTo,
@@ -29,12 +24,14 @@ public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 				childFrom, childTo);
 		// TODO Auto-generated constructor stub
 		mContext = context;
+		albumArt = new AlbumArtWrapper( context );
 	}
 
 	static class ViewHolder {
 		TextView tvArtist;
 		TextView tvAlbumCount;
 
+		ImageView ivAlbumArt;
 		TextView tvAlbumTitle;
 		TextView tvTrackCount;
 	}
@@ -124,6 +121,15 @@ public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 		vh.tvAlbumTitle.setText(album);
 		vh.tvTrackCount.setText(trackcount);
 		
+		if ( albumart == null || albumart.length() == 0) {
+			vh.ivAlbumArt.setBackgroundDrawable( albumArt.getmDefaultAlbumIcon());
+			vh.ivAlbumArt.setImageDrawable(null);
+        } else {
+            long artIndex = cursor.getLong( cursor.getColumnIndex( MediaStore.Audio.Albums._ID ) );
+            Drawable d = AlbumArtWrapper.getCachedArtwork(context, artIndex, albumArt.getmDefaultAlbumIcon());
+            vh.ivAlbumArt.setImageDrawable(d);
+        }
+		
 		super.bindChildView(view, context, cursor, isLastChild);
 	}
 
@@ -151,9 +157,12 @@ public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 		// return super.newChildView(context, cursor, isLastChild, parent);
 		View v = super.newChildView(context, cursor, isLastChild, parent);
 		ViewHolder vh = new ViewHolder();
-
+		
+		vh.ivAlbumArt = (ImageView) v.findViewById( R.id.ivAlbumArt );
 		vh.tvAlbumTitle = (TextView) v.findViewById(R.id.tvAlbumTitle);
 		vh.tvTrackCount = (TextView) v.findViewById(R.id.tvTrackCount);
+		
+		vh.ivAlbumArt.setBackgroundDrawable( albumArt.getmDefaultAlbumIcon());
 
 		v.setTag(vh);
 		return v;

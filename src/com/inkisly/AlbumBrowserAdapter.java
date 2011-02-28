@@ -1,10 +1,8 @@
 package com.inkisly;
 
-import com.inkisly.TrackBrowserAdapter.ViewHolder;
-import com.inkisly.util.LogTrace;
-
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 public class AlbumBrowserAdapter extends SimpleCursorAdapter {
 	
 	private Context mContext;
+	private AlbumArtWrapper albumArt;
 	
 	static class ViewHolder {
 		ImageView ivAlbumArt;
@@ -27,6 +26,7 @@ public class AlbumBrowserAdapter extends SimpleCursorAdapter {
 		super(context, layout, c, from, to);
 		// TODO Auto-generated constructor stub
 		mContext = context;
+		albumArt = new AlbumArtWrapper( context );
 	}
 
 	@Override
@@ -43,6 +43,14 @@ public class AlbumBrowserAdapter extends SimpleCursorAdapter {
 		vh.tvArtist.setText( strArtist );
 //		vh.tvArtist.setSelected( true );
 		
+		if ( strAlbumArt == null || strAlbumArt.length() == 0) {
+			vh.ivAlbumArt.setImageDrawable(null);
+        } else {
+            long artIndex = cursor.getLong( cursor.getColumnIndex( MediaStore.Audio.Albums._ID ) );
+            Drawable d = AlbumArtWrapper.getCachedArtwork(context, artIndex, albumArt.getmDefaultAlbumIcon());
+            vh.ivAlbumArt.setImageDrawable(d);
+        }
+		
 		super.bindView(view, context, cursor);
 	}
 
@@ -56,6 +64,8 @@ public class AlbumBrowserAdapter extends SimpleCursorAdapter {
 		vh.ivAlbumArt = (ImageView) v.findViewById( R.id.ivAlbumArt );
 		vh.tvAlbumTitle = (TextView) v.findViewById( R.id.tvAlbumTitle );
 		vh.tvArtist = (TextView) v.findViewById( R.id.tvArtist );
+		
+		vh.ivAlbumArt.setBackgroundDrawable( albumArt.getmDefaultAlbumIcon());
 		
 		v.setTag( vh );
 		return v;

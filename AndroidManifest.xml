@@ -38,6 +38,9 @@
         
         <activity android:name=".FileBrowser"
         	android:screenOrientation="portrait" />
+        
+        <activity android:name=".CoverFlowExample"
+        	android:screenOrientation="landscape" />
 
     </application>
 </manifest>

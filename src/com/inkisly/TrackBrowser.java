@@ -2,7 +2,6 @@ package com.inkisly;
 
 import com.inkisly.util.LogTrace;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Audio.Media;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -114,12 +111,13 @@ public class TrackBrowser extends ListActivity {
 		ContentsDBManager cm = new ContentsDBManager( mContext );
 
         StringBuilder where = new StringBuilder();
+        where.append(MediaStore.Audio.Media.IS_MUSIC + " = 1");
         
 		Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 		String [] projection = null;
 		String selection = null;
 		String [] selectionArgs = null;
-		String sortOrder = null;		
+		String sortOrder = null;
 
 		LogTrace.d("mGenreId : " + mGenreId );
 		LogTrace.d("mPlaylistId : " + mPlaylistId );
@@ -132,7 +130,6 @@ public class TrackBrowser extends ListActivity {
 			uri = MediaStore.Audio.Playlists.Members.getContentUri( "external", Integer.valueOf( mPlaylistId ) );
 		} else {
 			uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-            where.append(MediaStore.Audio.Media.IS_MUSIC + " = 1");
 			if ( mAlbumId != null ) {
 				where.append( " AND " + MediaStore.Audio.Media.ALBUM_ID + " =? ");
 				selectionArgs = new String[]{ mAlbumId };

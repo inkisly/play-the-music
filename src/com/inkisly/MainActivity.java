@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore.Audio.Artists;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +16,7 @@ public class MainActivity extends Activity {
 	private Button mBtnPlaylist;
 	private Button mBtnGenre;
     private Button mBtnBrowser;
+    private Button mBtnCoverFlow;
 
 
 	/** Called when the activity is first created. */
@@ -42,6 +42,8 @@ public class MainActivity extends Activity {
 		mBtnGenre.setOnClickListener( mOnClickListener );
 		mBtnBrowser = (Button) findViewById( R.id.btnBrowser );
 		mBtnBrowser.setOnClickListener( mOnClickListener );
+		mBtnCoverFlow = (Button) findViewById( R.id.btnCoverFlow );
+		mBtnCoverFlow.setOnClickListener( mOnClickListener );
 	}
 	
 	View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -83,6 +85,11 @@ public class MainActivity extends Activity {
 				startActivity( i );
 				break;
 
+			case R.id.btnCoverFlow:
+				i = new Intent( mContext, CoverFlowExample.class );
+				startActivity( i );
+				break;
+				
 			default:
 				break;
 			}
