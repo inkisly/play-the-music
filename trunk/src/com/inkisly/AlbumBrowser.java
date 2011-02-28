@@ -2,10 +2,14 @@ package com.inkisly;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.GridView;
 
 public class AlbumBrowser extends Activity {
@@ -57,6 +61,7 @@ public class AlbumBrowser extends Activity {
 	private void loadAllView() {
 		// TODO Auto-generated method stub
 		mGridAlbumList = (GridView) findViewById( R.id.gridAlbumList );
+		mGridAlbumList.setOnItemClickListener( mOnItemCliclListener );
 		
 		searchList();
 		mGridAlbumList.setAdapter( mAlbumBrowserAdapter );
@@ -81,5 +86,18 @@ public class AlbumBrowser extends Activity {
 		
 		mAlbumBrowserAdapter = new AlbumBrowserAdapter( mContext, R.layout.listitem_album_browser_grid, c, new String[]{}, new int[]{} );
 	}
+	
+	AdapterView.OnItemClickListener mOnItemCliclListener = new AdapterView.OnItemClickListener() {
 
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+	        Intent intent = new Intent(Intent.ACTION_PICK);
+	        intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
+	        intent.putExtra("album", Long.valueOf(id).toString());
+//	        intent.putExtra("artist", mArtistId);
+	        startActivity(intent);
+		}
+	};
 }

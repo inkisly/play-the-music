@@ -3,10 +3,13 @@ package com.inkisly;
 
 import android.app.ExpandableListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.widget.ExpandableListView;
 
 public class ArtistBrowser extends ExpandableListActivity {
 
@@ -50,6 +53,27 @@ public class ArtistBrowser extends ExpandableListActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+	}
+
+	@Override
+	public boolean onChildClick(ExpandableListView parent, View v,
+			int groupPosition, int childPosition, long id) {
+		// TODO Auto-generated method stub
+        String mCurrentAlbumId = Long.valueOf(id).toString();
+        
+		Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
+        intent.putExtra("album", mCurrentAlbumId);
+        Cursor c = (Cursor) getExpandableListAdapter().getChild(groupPosition, childPosition);
+        String album = c.getString(c.getColumnIndex(MediaStore.Audio.Albums.ALBUM));
+        if (album == null || album.equals(MediaStore.UNKNOWN_STRING)) {
+            // unknown album, so we should include the artist ID to limit the songs to songs only by that artist 
+//            mArtistCursor.moveToPosition(groupPosition);
+//            mCurrentArtistId = mArtistCursor.getString(mArtistCursor.getColumnIndex(MediaStore.Audio.Artists._ID));
+//            intent.putExtra("artist", mCurrentArtistId);
+        }
+        startActivity(intent);
+		return super.onChildClick(parent, v, groupPosition, childPosition, id);
 	}
 
 	private void loadAllView() {
