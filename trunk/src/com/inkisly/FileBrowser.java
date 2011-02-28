@@ -1,11 +1,8 @@
 package com.inkisly;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 
 import com.inkisly.util.LogTrace;
 
@@ -15,8 +12,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore.Audio.Media;
-import android.text.TextUtils.EllipsizeCallback;
 import android.text.TextUtils.TruncateAt;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,8 +29,6 @@ public class FileBrowser extends Activity {
 	private ListView mListBroser;
 	private FileBrowserAdapter mFileBrowserAdapter;
 	private ArrayList<FileBrowserItem> mFileBrowserItemsList = new ArrayList<FileBrowserItem>();
-
-	private MusicFileFilter fileFilter = new MusicFileFilter();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +76,6 @@ public class FileBrowser extends Activity {
 		case KeyEvent.KEYCODE_BACK:
 			if (current != null
 					&& !current.getParent().equals(root.getParent())) {
-				File file = new File(current.getParent());
 				setFileBrowser(current.getParentFile());
 				mFileBrowserAdapter.notifyDataSetChanged();
 				return false;

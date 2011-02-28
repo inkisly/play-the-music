@@ -1,7 +1,5 @@
 package com.inkisly;
 
-import com.inkisly.GenreBrowserAdapter.ViewHolder;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;

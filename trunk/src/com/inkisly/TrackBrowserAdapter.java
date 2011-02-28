@@ -8,8 +8,6 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 

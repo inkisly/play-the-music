@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent" android:layout_height="match_parent">
 	<ImageView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:src="@drawable/icon"
-		android:id="@+id/ivAlbumArt" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"></ImageView>
+		android:layout_height="wrap_content" android:id="@+id/ivAlbumArt" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"></ImageView>
 	<TextView android:text="TextView" android:id="@+id/tvAlbumTitle"
 		android:layout_height="wrap_content" android:ellipsize="marquee"
 		android:marqueeRepeatLimit="marquee_forever" android:singleLine="true" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/ivAlbumArt" android:layout_width="match_parent"></TextView>

@@ -13,4 +13,5 @@
 	<Button android:id="@+id/btnGenre" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="장르"></Button>
 	<Button android:id="@+id/btnBrowser" android:layout_height="wrap_content"
 		android:layout_width="wrap_content" android:text="브라우저"></Button>
+	<Button android:id="@+id/btnCoverFlow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="커버플로우"></Button>
 </LinearLayout>
