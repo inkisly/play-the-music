@@ -64,10 +64,22 @@
         </activity>
 
 		<activity android:name=".FileBrowser"
-			android:screenOrientation="portrait" />
+			android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/files"/>
+            </intent-filter>
+        </activity>
 
 		<activity android:name=".CoverFlowExample"
-			android:screenOrientation="landscape" />
+			android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/coverflow"/>
+            </intent-filter>
+        </activity>
 
 	</application>
 </manifest>

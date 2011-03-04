@@ -12,18 +12,24 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 public class AlbumBrowser extends Activity {
-	
+
 	private Context mContext;
-	
+
 	private GridView mGridAlbumList;
 	private AlbumBrowserAdapter mAlbumBrowserAdapter;
+
+	private String mArtistId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView( R.layout.album_browser );
+		setContentView(R.layout.album_browser);
 		mContext = getApplicationContext();
+
+		Intent i = getIntent();
+		mArtistId = i.getStringExtra("artist");
+
 		loadAllView();
 	}
 
@@ -59,44 +65,51 @@ public class AlbumBrowser extends Activity {
 
 	private void loadAllView() {
 		// TODO Auto-generated method stub
-		mGridAlbumList = (GridView) findViewById( R.id.gridAlbumList );
-		mGridAlbumList.setOnItemClickListener( mOnItemCliclListener );
-		
+		mGridAlbumList = (GridView) findViewById(R.id.gridAlbumList);
+		mGridAlbumList.setOnItemClickListener(mOnItemCliclListener);
+
 		searchList();
-		mGridAlbumList.setAdapter( mAlbumBrowserAdapter );
+		mGridAlbumList.setAdapter(mAlbumBrowserAdapter);
 	}
 
 	private void searchList() {
-		ContentsDBManager cm = new ContentsDBManager( mContext );
-		
+		ContentsDBManager cm = new ContentsDBManager(mContext);
+
 		Uri uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
-		String [] projection = new String[] {
-                MediaStore.Audio.Albums._ID,
-                MediaStore.Audio.Albums.ARTIST,
-                MediaStore.Audio.Albums.ALBUM,
-                MediaStore.Audio.Albums.ALBUM_ART
-        };
+		String[] projection = new String[] { MediaStore.Audio.Albums._ID,
+				MediaStore.Audio.Albums.ARTIST, MediaStore.Audio.Albums.ALBUM,
+				MediaStore.Audio.Albums.ALBUM_ART };
 		String selection = null;
-		String [] selectionArgs = null;
-		String sortOrder = null;		
-		
-		Cursor c = cm.query(uri, projection, selection, selectionArgs, sortOrder);
-		startManagingCursor( c );
-		
-		mAlbumBrowserAdapter = new AlbumBrowserAdapter( mContext, R.layout.listitem_album_browser_grid, c, new String[]{}, new int[]{} );
+		String[] selectionArgs = null;
+		String sortOrder = null;
+
+		StringBuilder where = new StringBuilder();
+
+		if (mArtistId != null) {
+			uri = MediaStore.Audio.Artists.Albums.getContentUri("external",
+					Long.parseLong(mArtistId));
+		}
+
+		Cursor c = cm.query(uri, projection, selection, selectionArgs,
+				sortOrder);
+		startManagingCursor(c);
+
+		mAlbumBrowserAdapter = new AlbumBrowserAdapter(mContext,
+				R.layout.listitem_album_browser_grid, c, new String[] {},
+				new int[] {});
 	}
-	
+
 	AdapterView.OnItemClickListener mOnItemCliclListener = new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-	        Intent intent = new Intent(Intent.ACTION_PICK);
-	        intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
-	        intent.putExtra("album", Long.valueOf(id).toString());
-//	        intent.putExtra("artist", mArtistId);
-	        startActivity(intent);
+			Intent intent = new Intent(Intent.ACTION_PICK);
+			intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
+			intent.putExtra("album", Long.valueOf(id).toString());
+			// intent.putExtra("artist", mArtistId);
+			startActivity(intent);
 		}
 	};
 }

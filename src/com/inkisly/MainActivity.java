@@ -3,7 +3,9 @@ package com.inkisly;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
@@ -51,48 +53,44 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
-			Intent i;
+
+	        Intent intent = new Intent(Intent.ACTION_PICK);
 			
 			switch ( v.getId() ) {
 			case R.id.btnAll:
-				i = new Intent( mContext, TrackBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/track");
 				break;
 				
 			case R.id.btnArtist:
-				i = new Intent( mContext, ArtistBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/artistalbum");
 				break;
 				
 			case R.id.btnAlbum:
-				i = new Intent( mContext, AlbumBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/album");
 				break;
 				
 			case R.id.btnPlaylist:
-				i = new Intent( mContext, PlaylistBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, MediaStore.Audio.Playlists.CONTENT_TYPE);
 				break;
 				
 			case R.id.btnGenre:
-				i = new Intent( mContext, GenreBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/genre");
 				break;
 				
 			case R.id.btnBrowser:
-				i = new Intent( mContext, FileBrowser.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/files");
 				break;
 
 			case R.id.btnCoverFlow:
-				i = new Intent( mContext, CoverFlowExample.class );
-				startActivity( i );
+                intent.setDataAndType(Uri.EMPTY, "vnd.android.cursor.dir/coverflow");
 				break;
 				
 			default:
 				break;
 			}
+
+	        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        startActivity(intent);
 		}
 	};
 }
