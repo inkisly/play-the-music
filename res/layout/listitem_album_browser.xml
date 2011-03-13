@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent" android:layout_height="match_parent">
-	<ImageView android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:id="@+id/ivAlbumArt" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"></ImageView>
+	android:layout_width="match_parent" android:layout_height="64dip"
+	android:gravity="center_vertical" android:ignoreGravity="@+id/ivAlbumArt">
+	<ImageView android:id="@+id/ivAlbumArt" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"></ImageView>
 	<TextView android:text="TextView" android:id="@+id/tvAlbumTitle"
-		android:layout_height="wrap_content" android:ellipsize="marquee"
-		android:marqueeRepeatLimit="marquee_forever" android:singleLine="true" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/ivAlbumArt" android:layout_width="match_parent"></TextView>
-	<TextView android:text="TextView" android:layout_height="wrap_content" android:marqueeRepeatLimit="marquee_forever" android:ellipsize="marquee"
-		android:singleLine="true" android:id="@+id/tvTrackCount" android:layout_toRightOf="@+id/ivAlbumArt" android:layout_width="match_parent" android:layout_below="@+id/tvAlbumTitle"></TextView>
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/ivAlbumArt" android:ellipsize="marquee"
+		android:marqueeRepeatLimit="marquee_forever" android:singleLine="true"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:maxLines="1" android:paddingLeft="9dip"
+		android:layout_alignWithParentIfMissing="true"></TextView>
+	<TextView android:text="TextView" android:layout_height="wrap_content"
+		android:marqueeRepeatLimit="marquee_forever" android:ellipsize="marquee"
+		android:singleLine="true" android:id="@+id/tvTrackCount"
+		android:layout_toRightOf="@+id/ivAlbumArt" android:layout_width="match_parent"
+		android:layout_below="@+id/tvAlbumTitle" android:textAppearance="?android:attr/textAppearanceSmall"
+		android:maxLines="1" android:paddingLeft="9dip"
+		android:layout_alignWithParentIfMissing="true"></TextView>
 </RelativeLayout>

@@ -8,4 +8,8 @@
 	<!-- Do not translate. Duration format for duration >= 1 hour -->
 	<string translatable="false" name="durationformatlong">%1$d:%3$02d:%5$02d</string>
 
+    <color name="expanding_child_background">#ff404040</color>
+    
+    <string name="temp_count_song">"%1$d곡의 노래"</string>
+    <string name="temp_count_album">"%1$d개의 앨범"</string>
 </resources>
