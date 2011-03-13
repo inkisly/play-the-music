@@ -28,7 +28,7 @@ public class AlbumArtWrapper {
 		super();
 		this.mContext = mContext;
 		
-		this.mDefaultAlbumIcon = (BitmapDrawable) mContext.getResources().getDrawable(R.drawable.icon);
+		this.mDefaultAlbumIcon = (BitmapDrawable) mContext.getResources().getDrawable(R.drawable.albumart_mp_unknown_list);
 		this.mDefaultAlbumIcon.setFilterBitmap(false);
 		this.mDefaultAlbumIcon.setDither(false);
 	}

@@ -113,13 +113,18 @@ public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 
 		String album = cursor.getString(cursor
 				.getColumnIndex(MediaStore.Audio.Albums.ALBUM ) );
-		String trackcount = cursor.getString(cursor
+		int trackcount = cursor.getInt(cursor
 				.getColumnIndex(MediaStore.Audio.Albums.NUMBER_OF_SONGS ) );
 		String albumart = cursor.getString(cursor
 				.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART ) );
 
+        String albumNum;
+        String format;
+        format = mContext.getString( R.string.temp_count_song );
+        albumNum = String.format(format, trackcount );
+        
 		vh.tvAlbumTitle.setText(album);
-		vh.tvTrackCount.setText(trackcount);
+		vh.tvTrackCount.setText(albumNum);
 		
 		if ( albumart == null || albumart.length() == 0) {
 			vh.ivAlbumArt.setBackgroundDrawable( albumArt.getmDefaultAlbumIcon());
@@ -141,11 +146,24 @@ public class ArtistBrowserAdapter extends SimpleCursorTreeAdapter {
 
 		String artist = cursor.getString(cursor
 				.getColumnIndex(MediaStore.Audio.Artists.ARTIST ));
-		String albumCount = cursor.getString(cursor
+		int albumCount = cursor.getInt(cursor
 				.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS ));
+		int trackCount = cursor.getInt(cursor
+				.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_TRACKS ));
 
+        boolean unknown = artist == null || artist.equals(MediaStore.UNKNOWN_STRING);
+		
+        String albumNum;
+        String format;
+        if ( unknown ) {
+            format = mContext.getString( R.string.temp_count_song );
+            albumNum = String.format(format, trackCount );
+        } else {
+            format = mContext.getString( R.string.temp_count_album );
+            albumNum = String.format(format, albumCount );
+        }
 		vh.tvArtist.setText(artist);
-		vh.tvAlbumCount.setText(albumCount);
+		vh.tvAlbumCount.setText(albumNum);
 
 		super.bindGroupView(view, context, cursor, isExpanded);
 	}
